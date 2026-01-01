@@ -26,6 +26,7 @@
 #include "ui/page_power.h"
 #include "ui/page_record.h"
 #include "ui/page_scannow.h"
+#include "ui/page_scananalog.h"
 #include "ui/page_sleep.h"
 #include "ui/page_source.h"
 #include "ui/page_storage.h"
@@ -46,10 +47,10 @@ static lv_obj_t *root_page;
 /**
  * Page order is enforced by definition.
  */
-#define PAGE_COUNT (g_setting.is_pro ? 18 : 16)
-static page_pack_t *page_packs[18];
+#define PAGE_COUNT (g_setting.is_pro ? 19 : 17)
+static page_pack_t *page_packs[19];
 
-static page_pack_t *post_bootup_actions[18 + 1];
+static page_pack_t *post_bootup_actions[19 + 1];
 static size_t post_bootup_actions_count = 0;
 static bool bootup_actions_fired = false;
 
@@ -290,6 +291,7 @@ void main_menu_init(void) {
     // init pp
     uint8_t i = 0;
     page_packs[i++] = &pp_scannow;
+    page_packs[i++] = &pp_scananalog;
     page_packs[i++] = &pp_source;
     page_packs[i++] = &pp_imagesettings;
     page_packs[i++] = &pp_osd;

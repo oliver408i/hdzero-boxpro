@@ -36,8 +36,9 @@ void gpadc_on(uint8_t is_on) {
 int gpdac0_get() {
     char buf[128];
 
-#ifndef EMULATOR_BUILD
-    return -1;
+#ifdef EMULATOR_BUILD
+    // No ADC in emulator; report 0 so RSSI stays zeroed.
+    return 0;
 #endif
 
     sprintf(buf, "awr 0x05070080 > %s", ADC0_FILE);

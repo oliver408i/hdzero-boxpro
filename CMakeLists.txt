@@ -72,6 +72,12 @@ file(GLOB SRC_FILES_PLAYER "src/player/*.c" "src/player/*.h")
 file(GLOB SRC_FILES_EMULATOR "src/emulator/*.c" "src/emulator/*.h")
 file(GLOB SRC_FILES_LANG "src/lang/*.c" "src/lang/*.h")
 
+# ensure new UI pages are linked even when CMake caches glob results
+list(APPEND SRC_FILES_UI
+	src/ui/page_scananalog.c
+	src/ui/page_scananalog.h
+)
+
 set(SRC_FILES
 	${SRC_FILES_CORE}
 	${SRC_FILES_DRIVER}

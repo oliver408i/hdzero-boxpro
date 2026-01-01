@@ -257,6 +257,7 @@ static void flash_goggle() {
 }
 
 int generate_current_version(sys_version_t *sys_ver) {
+    const char *mod_tag = " [MOD]";
     sys_ver->va = I2C_Read(ADDR_FPGA, 0xff);
     sys_ver->rx = rx_status[0].rx_ver;
     memset(sys_ver->commit, 0, sizeof(sys_ver->commit));
@@ -288,6 +289,7 @@ int generate_current_version(sys_version_t *sys_ver) {
                  sys_ver->app_patch,
                  sys_ver->commit,
                  sys_ver->rx, sys_ver->va);
+        strlcat(sys_ver->current, mod_tag, CURRENT_VER_MAX);
     } else {
         LOGI("app: %hhu.%hhu.%hhu rx: %u va: %u",
              sys_ver->app_major,
@@ -300,6 +302,7 @@ int generate_current_version(sys_version_t *sys_ver) {
                  sys_ver->app_minor,
                  sys_ver->app_patch,
                  sys_ver->rx, sys_ver->va);
+        strlcat(sys_ver->current, mod_tag, CURRENT_VER_MAX);
     }
 
     return 0;
