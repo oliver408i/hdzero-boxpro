@@ -23,3 +23,12 @@ Note you can always go back to the original firmware by downloading it from the 
 2. Put it in the root directory of your sd card
 3. Boot it up, and go to the firmware tab and click update BoxPro
 4. Follow instructions on screen, don't power off!
+
+## Pictures
+Note these are taken in the emulator, but I verified it looks the same in the goggles.
+<img width="1356" height="749" alt="image" src="https://github.com/user-attachments/assets/4da8ee1f-55f2-4e50-94eb-0ff30c2dbd72" />
+<img width="1360" height="767" alt="image" src="https://github.com/user-attachments/assets/e6c17ee3-f1c5-4a6b-bbfa-c69fab0fa733" />
+<img width="1360" height="767" alt="image" src="https://github.com/user-attachments/assets/71cb1a6e-a078-4e87-818d-28dcc504a621" />
+
+<img width="689" height="106" alt="image" src="https://github.com/user-attachments/assets/1a017745-30c3-4fa5-98a7-eb43243a5b41" />
+
