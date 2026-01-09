@@ -4,6 +4,7 @@ This is a QoL modification for the HDZero BoxPro Firmware.
 Current list of added features:
 - RSSI label and number next to the analog RSSI bar
 - Scan analog page just like the original "Scan now" for HDZero. Scans all analog channels and allows you to see which is active
+- A software rate limit for scroll wheel to prevent glitching (jumping around randomly)
 
 NOTES:
 - Use the right side button after analog scanning to go to the next band, and use the roller to select a frequency

@@ -4,6 +4,11 @@
         "dockerfile": "Dockerfile"
     },
     "runArgs": [
+        "-e", "DISPLAY=:0",
+        "-v", "/tmp/.X11-unix:/tmp/.X11-unix:rw",
+        "--ipc=host",
+        "--device", "/dev/dri",
+        "--group-add=video",
         "--cap-add=SYS_PTRACE",
         "--security-opt",
         "seccomp=unconfined"
@@ -23,6 +28,6 @@
             ]
         }
     },
-    "postCreateCommand": "bash setup.sh",
+    //"postCreateCommand": "bash setup.sh",
     "remoteUser": "vscode"
 }

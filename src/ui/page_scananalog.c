@@ -55,6 +55,7 @@ typedef struct {
     lv_obj_t *img0;
     lv_obj_t *label;
     lv_obj_t *img1;
+    lv_obj_t *rssi_label;
 } analog_channel_t;
 
 static analog_channel_t analog_channel_tb[8];
@@ -85,6 +86,8 @@ static void analog_select_signal(int idx_in_band) {
 }
 
 static void analog_set_signal_bar(analog_channel_t *channel, bool is_valid, int gain) {
+    char buf[8];
+
     if (!is_valid) {
         lv_img_set_src(channel->img0, &img_signal_status);
 
@@ -126,6 +129,9 @@ static void analog_set_signal_bar(analog_channel_t *channel, bool is_valid, int 
             lv_img_set_src(channel->img1, &img_ant8);
         }
     }
+
+    snprintf(buf, sizeof(buf), "%d", gain);
+    lv_label_set_text(channel->rssi_label, buf);
 }
 
 static lv_obj_t *create_channel_row(lv_obj_t *parent, analog_channel_t *channel, const char *name) {
@@ -152,6 +158,13 @@ static lv_obj_t *create_channel_row(lv_obj_t *parent, analog_channel_t *channel,
     lv_img_set_src(channel->img1, &img_ant1);
     lv_obj_set_size(channel->img1, 100, 40);
     lv_obj_set_style_pad_left(channel->img1, 12, 0);
+
+    channel->rssi_label = lv_label_create(channel->row);
+    lv_obj_set_style_text_font(channel->rssi_label, &lv_font_montserrat_18, 0);
+    lv_obj_set_style_text_align(channel->rssi_label, LV_TEXT_ALIGN_RIGHT, 0);
+    lv_obj_set_style_text_color(channel->rssi_label, lv_color_hex(TEXT_COLOR_DEFAULT), 0);
+    lv_obj_set_style_pad_left(channel->rssi_label, 8, 0);
+    lv_label_set_text(channel->rssi_label, "0");
 
     return channel->row;
 }
@@ -267,6 +280,10 @@ static int8_t scan_analog_now(void) {
     lv_bar_set_value(analog_progressbar, 0, LV_ANIM_OFF);
     lv_timer_handler();
 
+    // Ensure the analog RF front-end is powered for RSSI reads.
+    RTC6715_Open(1);
+    usleep(100 * 1000);
+
     // clear
     for (int ch = 0; ch < ANALOG_CHANNEL_NUM; ch++) {
         analog_status_tb[ch].is_valid = 0;
@@ -305,6 +322,7 @@ static int8_t scan_analog_now(void) {
     lv_label_set_text(analog_label, _lang("Scanning done"));
     snprintf(buf, sizeof(buf), "%s: %d", _lang("Found"), found_count);
     lv_label_set_text(analog_found_label, buf);
+    RTC6715_Open(0);
     if (!valid_index)
         return -1;
     else
