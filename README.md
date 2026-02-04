@@ -1,6 +1,8 @@
 # HDZero BoxPro Firmware mod
 This is a QoL modification for the HDZero BoxPro Firmware.
 
+## This repo is old, see new version here https://github.com/oliver408i/hdzero-goggle
+
 Current list of added features:
 - RSSI label and number next to the analog RSSI bar
 - Scan analog page just like the original "Scan now" for HDZero. Scans all analog channels and allows you to see which is active
